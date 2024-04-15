@@ -21,8 +21,6 @@ public class CarsController {
 
     @Autowired
     private CarServices carServices;
-    @Autowired
-    private UserServices userServices;
 
 
     @GetMapping("/cars/all")

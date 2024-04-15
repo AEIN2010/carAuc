@@ -1,7 +1,6 @@
 package com.example.caraucbackend.controllers;
 
 import com.example.caraucbackend.entities.User;
-import com.example.caraucbackend.services.CarServices;
 import com.example.caraucbackend.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

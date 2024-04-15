@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface CarRepo extends JpaRepository<Car, String> {
 
-    public Car findCarByIdIs(String carId);
+    Car findCarByIdIs(String carId);
 
-    public List<Car> findCarsByMakeIs(String make);
+    List<Car> findCarsByMakeIs(String make);
 
 }
