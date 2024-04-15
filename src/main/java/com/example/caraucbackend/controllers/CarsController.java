@@ -1,28 +1,21 @@
-package com.example.caraucbackend;
+package com.example.caraucbackend.controllers;
 
+import com.example.caraucbackend.entities.Car;
+import com.example.caraucbackend.services.CarServices;
+import com.example.caraucbackend.services.UserServices;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 
+
 @RestController
-public class Controller {
-
-    /*
-    List of all end-points:
-    --to get all cars: http://127.0.0.1:8080/cars/all
-    --to get car by Id: http://127.0.0.1:8080/cars/{id}
-    --to get cars by make: http://127.0.0.1:8080/cars?make=...
-    --to login: http://127.0.0.1:8080/login
-    add Json body to the request
-    {
-    "username": "Mark",
-    "password": "1234"
-    }
-
-     */
+public class CarsController {
 
 
 
@@ -53,10 +46,5 @@ public class Controller {
     }
 
 
-    @GetMapping("/login")
-    @ResponseBody
-    private User userLoginToPage(@RequestBody User user){
-        return userServices.login(user);
-    }
 
 }

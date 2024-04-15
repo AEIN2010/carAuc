@@ -1,6 +1,8 @@
-package com.example.caraucbackend;
+package com.example.caraucbackend.services;
 
 
+import com.example.caraucbackend.repos.UserRepo;
+import com.example.caraucbackend.entities.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

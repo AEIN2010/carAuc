@@ -1,4 +1,4 @@
-package com.example.caraucbackend;
+package com.example.caraucbackend.entities;
 
 
 import jakarta.persistence.Entity;
