@@ -2,7 +2,6 @@ package com.example.caraucbackend.controllers;
 
 import com.example.caraucbackend.entities.Car;
 import com.example.caraucbackend.services.CarServices;
-import com.example.caraucbackend.services.UserServices;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
