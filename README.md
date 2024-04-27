@@ -7,3 +7,6 @@ auction management.
 
 
 **UML and ERD wil be added soon!
+
+![ERDFinalProj](https://github.com/AEIN2010/carAuctionProject/assets/97475507/6c0bf74d-8409-45a4-9f60-6f8c1e191067)
+
