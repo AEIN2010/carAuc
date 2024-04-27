@@ -6,13 +6,22 @@ real-time bidding, payment integration, and robust administrative tools for effe
 auction management.
 
 
-System Features:
+System requirments:
 
 -Users can add items to the system
 
 -users can view Items available on the system and bid
 
 -the system will keep track of the bidding history of each listing
+
+Features (Already added)
+
+1- add new user
+2- add new car
+3- view All cars
+4- view a car by its vin ()
+5- bid on an existing car
+![image](https://github.com/AEIN2010/carAuctionProject/assets/97475507/7c99b4c6-8545-4eed-afd8-0454fb5b79f0)
 
 
 
