@@ -17,10 +17,12 @@ System Features:
 
 
 UML
+
 ![UML](https://github.com/AEIN2010/carAuctionProject/assets/97475507/122a9e07-3a2f-4c58-86b0-03651e96027e)
 
 
 ERD
+
 ![ERDFinalProj](https://github.com/AEIN2010/carAuctionProject/assets/97475507/6c0bf74d-8409-45a4-9f60-6f8c1e191067)
 
 
