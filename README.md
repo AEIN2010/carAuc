@@ -8,9 +8,11 @@ auction management.
 
 System Features:
 
-Users can add items to the system
-users can view Items available on the system and bid
-the system will keep track of the bidding history of each listing
+-Users can add items to the system
+
+-users can view Items available on the system and bid
+
+-the system will keep track of the bidding history of each listing
 
 
 
