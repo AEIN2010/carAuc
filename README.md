@@ -21,9 +21,16 @@ Features (Already added)
 3- view All cars
 4- view a car by its vin ()
 5- bid on an existing car
-![image](https://github.com/AEIN2010/carAuctionProject/assets/97475507/09da901a-ef2f-44e4-bcea-8f6a1fc512b1)
+![image](https://github.com/AEIN2010/carAuctionProject/assets/97475507/e567f093-9737-494e-94a7-3941d65dee1a)
 
 
+Features (To Be Added)![image](https://github.com/AEIN2010/carAuctionProject/assets/97475507/357a8cf1-36a1-4607-9b97-f9e62d33213e)
+
+1- user can view cars he bid on
+2- user can view cars he added
+3- user can view cars he purchases
+4- add authorization and and authentication (left till the end for the purpose of making the development easy)
+![image](https://github.com/AEIN2010/carAuctionProject/assets/97475507/bc5939a5-3eeb-4dcd-9fd6-3c45e3e86ed1)
 
 UML
 
