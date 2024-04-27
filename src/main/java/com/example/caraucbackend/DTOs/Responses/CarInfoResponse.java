@@ -1,6 +1,9 @@
-package com.example.caraucbackend.entities;
+package com.example.caraucbackend.DTOs.Responses;
 
 
+
+import com.example.caraucbackend.entities.Bid;
+import com.example.caraucbackend.entities.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,14 +12,13 @@ import java.util.List;
 
 
 @Data
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Car {
+public class CarInfoResponse {
 
-    @Id
+    @NotNull
     private String vin;
     @NotNull
     private String make;
@@ -30,8 +32,6 @@ public class Car {
     private String image;
     @NotNull
     private String mileage;
-
-    @ManyToOne
     @NotNull
     private User lister;
 

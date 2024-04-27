@@ -1,22 +1,19 @@
-package com.example.caraucbackend.entities;
+package com.example.caraucbackend.DTOs.Requests;
 
 
-import jakarta.persistence.*;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 
 @Data
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Car {
+public class NewCarRequest {
 
-    @Id
+    @NotNull
     private String vin;
     @NotNull
     private String make;
@@ -30,11 +27,8 @@ public class Car {
     private String image;
     @NotNull
     private String mileage;
-
-    @ManyToOne
     @NotNull
-    private User lister;
+    private String listerUsername;
 
-    @OneToMany
-    private List<Bid> bidHistory;
+
 }

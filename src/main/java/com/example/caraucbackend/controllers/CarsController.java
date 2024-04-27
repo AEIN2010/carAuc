@@ -1,19 +1,16 @@
 package com.example.caraucbackend.controllers;
 
-import com.example.caraucbackend.entities.Car;
+import com.example.caraucbackend.DTOs.GeneralResponse;
+import com.example.caraucbackend.DTOs.Requests.NewCarRequest;
 import com.example.caraucbackend.services.CarServices;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 
 
 @RestController
+@RequestMapping("/cars")
 public class CarsController {
 
 
@@ -22,24 +19,30 @@ public class CarsController {
     private CarServices carServices;
 
 
-    @GetMapping("/cars/all")
+    @GetMapping("/all")
     @ResponseBody
-    private List<Car> getAll(){
+    private GeneralResponse getAll(){
         return carServices.getAllCars();
     }
 
 
-    @GetMapping("/cars")
+//    @GetMapping("/")
+//    @ResponseBody
+//    private GeneralResponse getCarsByMake(@PathParam("make") String make){
+//        return carServices.getCarsByMake(make);
+//    }
+
+
+    @GetMapping("/{vin}")
     @ResponseBody
-    private List<Car> getCarsByMake(@PathParam("make") String make){
-        return carServices.getCarsByMake(make);
+    private GeneralResponse getCarById(@PathVariable String vin){
+        return carServices.getCarByVin(vin);
     }
 
-
-    @GetMapping("/cars/{id}")
+    @PostMapping("/add")
     @ResponseBody
-    private Car getCarById(@PathVariable String id){
-        return carServices.getCarById(id);
+    private GeneralResponse addCar(@RequestBody NewCarRequest car){
+        return carServices.addCar(car);
     }
 
 

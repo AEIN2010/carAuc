@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+
 @Entity
 @Data
 @Getter
@@ -17,6 +19,9 @@ public class User {
 
     @Id
     private String username;
+    @NotNull
     private String password;
+    @NotNull
     private char isAdmin;
+
 }
