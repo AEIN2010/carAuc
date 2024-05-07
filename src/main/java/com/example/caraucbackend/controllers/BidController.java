@@ -7,6 +7,8 @@ import com.example.caraucbackend.services.BidServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/bids")
 public class BidController {

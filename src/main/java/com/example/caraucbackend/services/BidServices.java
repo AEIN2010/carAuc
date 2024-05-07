@@ -33,14 +33,7 @@ public class BidServices {
                 && userServices.userExists(bidRequest.getBidderUserName())){
 
 
-            double highestBid = (!car.getBidHistory().isEmpty()) ?
-                    car
-                    .getBidHistory()
-                    .stream()
-                    .sorted(Comparator
-                            .comparing(Bid::getAmount))
-                    .toList().getLast().getAmount()
-                    : 0;
+            double highestBid = car.getPrice();
 
             if (bidRequest.getAmount() > highestBid){
                 Bid currentBid = bidRepo.save(new Bid(bidRequest.getAmount()
@@ -51,6 +44,8 @@ public class BidServices {
                 User user = userServices.getUserByUserName(bidRequest.getBidderUserName());
                 Car car2 = (Car) carServices.getCarByVin(bidRequest.getCarVin()).getBody().getData();
                 car2.getBidHistory().add(currentBid);
+                car2.setPrice((long) bidRequest.getAmount());
+
 
                 userServices.updateUser(user);
                 carServices.updateCar(car2);
