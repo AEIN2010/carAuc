@@ -1,6 +1,7 @@
 package com.example.caraucbackend.DTOs.Requests;
 
 
+import com.example.caraucbackend.entities.CarStatus;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -27,6 +28,8 @@ public class NewCarRequest {
     private String image;
     @NotNull
     private String mileage;
+    @NotNull
+    private CarStatus carStatus;
     @NotNull
     private String listerUsername;
 

@@ -41,13 +41,13 @@ public class BidServices {
                                         , LocalTime.now()
                                         , userServices.getUserByUserName(bidRequest.getBidderUserName())));
 
-                User user = userServices.getUserByUserName(bidRequest.getBidderUserName());
+                //User user = userServices.getUserByUserName(bidRequest.getBidderUserName());
                 Car car2 = (Car) carServices.getCarByVin(bidRequest.getCarVin()).getBody().getData();
                 car2.getBidHistory().add(currentBid);
                 car2.setPrice((long) bidRequest.getAmount());
 
 
-                userServices.updateUser(user);
+                //userServices.updateUser(user);
                 carServices.updateCar(car2);
 
 

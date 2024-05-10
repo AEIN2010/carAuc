@@ -19,13 +19,27 @@ public class UserServices {
     private final UserRepo userRepo;
 
     public GeneralResponse login(User user){
-        return new GeneralResponse(
-                HttpStatus.ACCEPTED,
-                "car found",
-                LocalDate.now(),
-                LocalTime.now(),
-                new ResponseBody<>( userRepo.findUserByUsernameIsAndPasswordIs(user.getUsername(), user.getPassword()))
-        );
+
+        User userFound = userRepo.findUserByUsernameIsAndPasswordIs(user.getUsername(), user.getPassword());
+
+        if(userFound != null){
+            return new GeneralResponse(
+                    HttpStatus.FOUND,
+                    "User logged in",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new ResponseBody<>(userFound)
+            );
+        }else{
+            return new GeneralResponse(
+                    HttpStatus.NOT_FOUND,
+                    "Wrong username or password",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new ResponseBody<>(userFound)
+            );
+        }
+
     }
 
 
@@ -40,11 +54,27 @@ public class UserServices {
     }
 
 
-    public User updateUser(User user){
-        return userRepo.save(user);
-    }
+//    public User updateUser(User user){
+//        return userRepo.save(user);
+//    }
 
-    public User addNewUser(User user) {
-        return userRepo.save(user);
+    public GeneralResponse addNewUser(User user) {
+        if(userExists(user.getUsername())){
+            return new GeneralResponse(
+                    HttpStatus.BAD_REQUEST,
+                    "Username taken!",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new ResponseBody<>(null)
+            );
+        }else{
+            return new GeneralResponse(
+                    HttpStatus.ACCEPTED,
+                    "User Added!",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new ResponseBody<>(userRepo.save(user))
+            );
+        }
     }
 }

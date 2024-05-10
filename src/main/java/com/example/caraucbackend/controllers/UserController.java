@@ -19,14 +19,14 @@ public class UserController {
 
     @GetMapping("/login")
     @ResponseBody
-    private GeneralResponse userLoginToPage(@RequestBody User user){
+    private GeneralResponse userLoginTo(@RequestBody User user){
         return userServices.login(user);
     }
 
 
     @PostMapping("/add")
     @ResponseBody
-    private User addNewUser(@RequestBody User user){
+    private GeneralResponse addNewUser(@RequestBody User user){
         return userServices.addNewUser(user);
     }
 

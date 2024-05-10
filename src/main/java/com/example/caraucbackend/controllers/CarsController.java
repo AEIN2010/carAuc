@@ -34,7 +34,7 @@ public class CarsController {
 //    }
 
 
-    @GetMapping("/{vin}")
+    @GetMapping("/vin/{vin}")
     @ResponseBody
     private GeneralResponse getCarById(@PathVariable String vin){
         return carServices.getCarByVin(vin);
@@ -44,6 +44,12 @@ public class CarsController {
     @ResponseBody
     private GeneralResponse addCar(@RequestBody NewCarRequest car){
         return carServices.addCar(car);
+    }
+
+    @GetMapping("/user/{username}")
+    @ResponseBody
+    private GeneralResponse getCarsByusername(@PathVariable String username){
+        return carServices.carsListedByUser(username);
     }
 
 

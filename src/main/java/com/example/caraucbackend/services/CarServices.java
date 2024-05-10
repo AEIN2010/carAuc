@@ -75,6 +75,7 @@ public class CarServices {
                 car.getPrice(),
                 car.getImage(),
                 car.getMileage(),
+                car.getCarStatus(),
                 user,
                 new ArrayList<>()
         ));
@@ -95,6 +96,24 @@ public class CarServices {
                 LocalDate.now(),
                 LocalTime.now(),
                 new ResponseBody<>(carRepo.save(car))
+        );
+    }
+
+
+    public GeneralResponse carsListedByUser(String username){
+
+        List<Car> cars = carRepo.findAllByListerUsernameIs(username);
+
+        cars.forEach(car -> {car.setBidHistory(null);
+                             car.setLister(null);
+                            });
+
+        return new GeneralResponse(
+                HttpStatus.FOUND,
+                "Cars found for user: "+username,
+                LocalDate.now(),
+                LocalTime.now(),
+                new ResponseBody<>(cars)
         );
     }
 
