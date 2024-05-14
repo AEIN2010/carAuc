@@ -6,10 +6,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResponseBody<T> {
+public class GeneralResponseBody<T> {
     private T data;
 
-    public ResponseBody(T data) {
+    public GeneralResponseBody(T data) {
         this.data = data;
     }
 

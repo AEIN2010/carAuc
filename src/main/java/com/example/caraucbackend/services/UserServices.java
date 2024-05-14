@@ -2,7 +2,7 @@ package com.example.caraucbackend.services;
 
 
 import com.example.caraucbackend.DTOs.GeneralResponse;
-import com.example.caraucbackend.DTOs.ResponseBody;
+import com.example.caraucbackend.DTOs.GeneralResponseBody;
 import com.example.caraucbackend.repos.UserRepo;
 import com.example.caraucbackend.entities.User;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class UserServices {
                     "User logged in",
                     LocalDate.now(),
                     LocalTime.now(),
-                    new ResponseBody<>(userFound)
+                    new GeneralResponseBody<>(userFound)
             );
         }else{
             return new GeneralResponse(
@@ -36,11 +36,18 @@ public class UserServices {
                     "Wrong username or password",
                     LocalDate.now(),
                     LocalTime.now(),
-                    new ResponseBody<>(userFound)
+                    new GeneralResponseBody<>(userFound)
             );
         }
 
     }
+
+    public boolean usernameAndPasswordChecker(String username, String password){
+
+        return userRepo.findUserByUsernameIsAndPasswordIs(username, password) != null;
+
+    }
+
 
 
     public boolean userExists(String username){
@@ -65,7 +72,7 @@ public class UserServices {
                     "Username taken!",
                     LocalDate.now(),
                     LocalTime.now(),
-                    new ResponseBody<>(null)
+                    new GeneralResponseBody<>(null)
             );
         }else{
             return new GeneralResponse(
@@ -73,7 +80,7 @@ public class UserServices {
                     "User Added!",
                     LocalDate.now(),
                     LocalTime.now(),
-                    new ResponseBody<>(userRepo.save(user))
+                    new GeneralResponseBody<>(userRepo.save(user))
             );
         }
     }
