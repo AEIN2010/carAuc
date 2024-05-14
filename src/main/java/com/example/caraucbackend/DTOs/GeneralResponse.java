@@ -28,6 +28,6 @@ public class GeneralResponse {
     @NotNull
     private LocalTime time;
     @NotNull
-    private ResponseBody body;
+    private GeneralResponseBody body;
 
 }

@@ -11,5 +11,9 @@ public class SecurityChecker {
 
     private final UserServices userServices;
 
+    public boolean isValidRequest(String username, String password){
+        return userServices.usernameAndPasswordChecker(username, password);
+    }
+
 
 }

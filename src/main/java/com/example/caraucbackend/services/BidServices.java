@@ -3,10 +3,9 @@ package com.example.caraucbackend.services;
 
 import com.example.caraucbackend.DTOs.GeneralResponse;
 import com.example.caraucbackend.DTOs.Requests.NewBidRequest;
-import com.example.caraucbackend.DTOs.ResponseBody;
+import com.example.caraucbackend.DTOs.GeneralResponseBody;
 import com.example.caraucbackend.entities.Bid;
 import com.example.caraucbackend.entities.Car;
-import com.example.caraucbackend.entities.User;
 import com.example.caraucbackend.repos.BidRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Comparator;
 
 @Service
 @RequiredArgsConstructor
@@ -56,7 +54,7 @@ public class BidServices {
                         "Bid Added Successfully",
                         LocalDate.now(),
                         LocalTime.now(),
-                        new ResponseBody<>(bidRepo.findById(currentBid.getBidID()))
+                        new GeneralResponseBody<>(bidRepo.findById(currentBid.getBidID()))
                 );
             }else{
                 return new GeneralResponse(
@@ -64,7 +62,7 @@ public class BidServices {
                         "Bid Amount Less Than Last Bid!!",
                         LocalDate.now(),
                         LocalTime.now(),
-                        new ResponseBody<>(null)
+                        new GeneralResponseBody<>(null)
                 );
             }
         }else{
@@ -73,7 +71,7 @@ public class BidServices {
                     "Car Or User Does Not Exist!!",
                     LocalDate.now(),
                     LocalTime.now(),
-                    new ResponseBody<>(null)
+                    new GeneralResponseBody<>(null)
             );
         }
 

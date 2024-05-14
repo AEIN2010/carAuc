@@ -3,7 +3,8 @@ package com.example.caraucbackend.services;
 
 import com.example.caraucbackend.DTOs.GeneralResponse;
 import com.example.caraucbackend.DTOs.Requests.NewCarRequest;
-import com.example.caraucbackend.DTOs.ResponseBody;
+import com.example.caraucbackend.DTOs.GeneralResponseBody;
+import com.example.caraucbackend.entities.CarStatus;
 import com.example.caraucbackend.entities.User;
 import com.example.caraucbackend.repos.CarRepo;
 import com.example.caraucbackend.entities.Car;
@@ -33,7 +34,7 @@ public class CarServices {
                 "car found",
                 LocalDate.now(),
                 LocalTime.now(),
-                new ResponseBody<>(cars)
+                new GeneralResponseBody<>(cars)
         );
     }
 
@@ -44,7 +45,7 @@ public class CarServices {
                 "car found",
                 LocalDate.now(),
                 LocalTime.now(),
-                new ResponseBody<>(car)
+                new GeneralResponseBody<>(car)
         );
     }
 
@@ -67,7 +68,17 @@ public class CarServices {
 
     public GeneralResponse addCar(NewCarRequest car){
         User user = userServices.getUserByUserName(car.getListerUsername());
-        Car addedCar = carRepo.save(new Car(
+        if(carRepo.findCarByVinIs(car.getVin()) != null){
+            return new GeneralResponse(
+                    HttpStatus.NOT_ACCEPTABLE,
+                    "car with this VIN already exists!",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(null)
+            );
+        }
+
+        carRepo.save(new Car(
                 car.getVin(),
                 car.getMake(),
                 car.getModel(),
@@ -79,24 +90,43 @@ public class CarServices {
                 user,
                 new ArrayList<>()
         ));
-        addedCar.setLister(user);
+
         return new GeneralResponse(
                 HttpStatus.ACCEPTED,
                 "car added successfully",
                 LocalDate.now(),
                 LocalTime.now(),
-                new ResponseBody<>(car)
+                new GeneralResponseBody<>(car)
         );
     }
 
-    public GeneralResponse updateCar(Car car){
-        return new GeneralResponse(
-                HttpStatus.ACCEPTED,
-                "car updated successfully",
-                LocalDate.now(),
-                LocalTime.now(),
-                new ResponseBody<>(carRepo.save(car))
-        );
+
+
+    public GeneralResponse markCarAsSold(String vin){
+
+        Car car = carRepo.findCarByVinIs(vin);
+
+        if(car != null){
+
+            car.setCarStatus(CarStatus.SOLD);
+
+            return new GeneralResponse(
+                    HttpStatus.ACCEPTED,
+                    "car marked as sold successfully",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(carRepo.save(car))
+            );
+        }
+        else {
+            return new GeneralResponse(
+                    HttpStatus.NOT_ACCEPTABLE,
+                    "car does not exist",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(null)
+            );        }
+
     }
 
 
@@ -113,8 +143,21 @@ public class CarServices {
                 "Cars found for user: "+username,
                 LocalDate.now(),
                 LocalTime.now(),
-                new ResponseBody<>(cars)
+                new GeneralResponseBody<>(cars)
         );
     }
+
+
+    public GeneralResponse updateCar(Car car){
+        return new GeneralResponse(
+                HttpStatus.ACCEPTED,
+                "car updated successfully",
+                LocalDate.now(),
+                LocalTime.now(),
+                new GeneralResponseBody(carRepo.save(car))
+        );
+    }
+
+
 
 }
