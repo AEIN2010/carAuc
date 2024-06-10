@@ -26,7 +26,7 @@ public class CarsController {
     private UserServices userServices;
 
 
-    @GetMapping("/all/{username}/{password}")
+    @GetMapping("/all")
     @ResponseBody
     private GeneralResponse getAll(){
         return carServices.getAllCars();
@@ -40,20 +40,9 @@ public class CarsController {
 //    }
 
 
-    @GetMapping("/vin/{vin}/{username}/{password}")
+    @GetMapping("/vin/{vin}")
     @ResponseBody
-    private GeneralResponse getCarById(@PathVariable String vin,
-                                       @PathVariable String username,
-                                       @PathVariable String password){
-        if(!userServices.usernameAndPasswordChecker(username, password)){
-            return new GeneralResponse(
-                    HttpStatus.UNAUTHORIZED,
-                    "Wrong Security Credentials",
-                    LocalDate.now(),
-                    LocalTime.now(),
-                    new GeneralResponseBody(null)
-            );
-        }
+    private GeneralResponse getCarById(@PathVariable String vin){
         return carServices.getCarByVin(vin);
     }
 
@@ -106,7 +95,7 @@ public class CarsController {
                     new GeneralResponseBody(null)
             );
         }
-        return carServices.markCarAsSold(vin);
+        return carServices.markCarAsSold(vin,username);
     }
 
 }

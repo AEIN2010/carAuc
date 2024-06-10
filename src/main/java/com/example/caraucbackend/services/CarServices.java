@@ -102,11 +102,11 @@ public class CarServices {
 
 
 
-    public GeneralResponse markCarAsSold(String vin){
+    public GeneralResponse markCarAsSold(String vin, String username){
 
         Car car = carRepo.findCarByVinIs(vin);
 
-        if(car != null){
+        if(car != null && car.getLister().getUsername().equals(username)){
 
             car.setCarStatus(CarStatus.SOLD);
 

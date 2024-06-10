@@ -18,9 +18,9 @@ public class UserServices {
 
     private final UserRepo userRepo;
 
-    public GeneralResponse login(User user){
+    public GeneralResponse login(String username, String password){
 
-        User userFound = userRepo.findUserByUsernameIsAndPasswordIs(user.getUsername(), user.getPassword());
+        User userFound = userRepo.findUserByUsernameIsAndPasswordIs(username, password);
 
         if(userFound != null){
             return new GeneralResponse(
