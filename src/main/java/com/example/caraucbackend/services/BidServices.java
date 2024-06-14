@@ -6,6 +6,7 @@ import com.example.caraucbackend.DTOs.Requests.NewBidRequest;
 import com.example.caraucbackend.DTOs.GeneralResponseBody;
 import com.example.caraucbackend.entities.Bid;
 import com.example.caraucbackend.entities.Car;
+import com.example.caraucbackend.entities.User;
 import com.example.caraucbackend.repos.BidRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -76,6 +77,26 @@ public class BidServices {
         }
 
 
+    }
+
+    public GeneralResponse getBidsByUsername(String username) {
+        if(!userServices.userExists(username)){
+            return new GeneralResponse(
+                    HttpStatus.BAD_REQUEST,
+                    "User Did Not Make Any Bids",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(null)
+            );
+        }else{
+            return new GeneralResponse(
+                    HttpStatus.ACCEPTED,
+                    "FOUND",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(bidRepo.findAllByBidderUsernameIs(username))
+            );
+        }
     }
 
 }

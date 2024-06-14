@@ -3,6 +3,7 @@ package com.example.caraucbackend.controllers;
 import com.example.caraucbackend.DTOs.GeneralResponse;
 import com.example.caraucbackend.DTOs.GeneralResponseBody;
 import com.example.caraucbackend.DTOs.Requests.NewCarRequest;
+import com.example.caraucbackend.entities.CarStatus;
 import com.example.caraucbackend.services.CarServices;
 import com.example.caraucbackend.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +87,7 @@ public class CarsController {
     private GeneralResponse markCarAsSold(@PathVariable String vin,
                                        @PathVariable String username,
                                        @PathVariable String password){
-        if(!userServices.usernameAndPasswordChecker(username, password)){
+        if(!userServices.usernameAndPasswordChecker(username, password) && carServices.getCarByVin(vin).getBody().getData().equals(CarStatus.ACTIVE)){
             return new GeneralResponse(
                     HttpStatus.UNAUTHORIZED,
                     "Wrong Security Credentials",
@@ -96,6 +97,24 @@ public class CarsController {
             );
         }
         return carServices.markCarAsSold(vin,username);
+    }
+
+
+    @GetMapping("/deactivate/{vin}/{username}/{password}")
+    @ResponseBody
+    private GeneralResponse markCarAsInactive(@PathVariable String vin,
+                                          @PathVariable String username,
+                                          @PathVariable String password){
+        if(!userServices.usernameAndPasswordChecker(username, password) && userServices.getUserByUserName(username).getIsAdmin()=='Y'){
+            return new GeneralResponse(
+                    HttpStatus.UNAUTHORIZED,
+                    "Wrong Security Credentials",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody(null)
+            );
+        }
+        return carServices.markCarAsInactive(vin,username);
     }
 
 }

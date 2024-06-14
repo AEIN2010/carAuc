@@ -44,4 +44,23 @@ public class BidController {
         }
         return bidServices.addNewBid(bidRequest);
     }
+
+
+    @GetMapping("/find/{username}/{password}")
+    @ResponseBody
+    private GeneralResponse getBidsByUsername(
+                                      @PathVariable String username,
+                                      @PathVariable String password){
+
+        if(!userServices.usernameAndPasswordChecker(username, password)){
+            return new GeneralResponse(
+                    HttpStatus.UNAUTHORIZED,
+                    "Wrong Security Credentials",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody(null)
+            );
+        }
+        return bidServices.getBidsByUsername(username);
+    }
 }
