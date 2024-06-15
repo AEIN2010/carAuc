@@ -20,12 +20,12 @@ public class UserController {
 
     @GetMapping("/login/{username}/{password}")
     @ResponseBody
-    private GeneralResponse userLoginTo(@RequestBody User user){
-        return userServices.login(user);
+    private GeneralResponse userLoginTo(@PathVariable String username, @PathVariable String password){
+        return userServices.login(username, password);
     }
 
 
-    @PostMapping("/add/{username}/{password}")
+    @PostMapping("/add")
     @ResponseBody
     private GeneralResponse addNewUser(@RequestBody User user){
         return userServices.addNewUser(user);

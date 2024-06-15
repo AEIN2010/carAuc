@@ -102,13 +102,41 @@ public class CarServices {
 
 
 
-    public GeneralResponse markCarAsSold(String vin){
+    public GeneralResponse markCarAsSold(String vin, String username){
 
         Car car = carRepo.findCarByVinIs(vin);
 
-        if(car != null){
+        if(car != null && car.getLister().getUsername().equals(username)){
 
             car.setCarStatus(CarStatus.SOLD);
+
+            return new GeneralResponse(
+                    HttpStatus.ACCEPTED,
+                    "car marked as sold successfully",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(carRepo.save(car))
+            );
+        }
+        else {
+            return new GeneralResponse(
+                    HttpStatus.NOT_ACCEPTABLE,
+                    "car does not exist",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(null)
+            );        }
+
+    }
+
+
+    public GeneralResponse markCarAsInactive(String vin, String username){
+
+        Car car = carRepo.findCarByVinIs(vin);
+
+        if(car != null && car.getLister().getUsername().equals(username)){
+
+            car.setCarStatus(CarStatus.INACTIVE);
 
             return new GeneralResponse(
                     HttpStatus.ACCEPTED,
