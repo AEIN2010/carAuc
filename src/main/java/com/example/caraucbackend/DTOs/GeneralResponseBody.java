@@ -13,5 +13,9 @@ public class GeneralResponseBody<T> {
         this.data = data;
     }
 
+    public GeneralResponseBody(Void data) {
+        this.data = null;
+    }
+
     // Getters and setters for data
 }

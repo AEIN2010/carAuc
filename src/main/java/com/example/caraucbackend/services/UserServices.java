@@ -44,7 +44,12 @@ public class UserServices {
 
     public boolean usernameAndPasswordChecker(String username, String password){
 
-        return userRepo.findUserByUsernameIsAndPasswordIs(username, password) != null;
+        User user = userRepo.findUserByUsernameIsAndPasswordIs(username, password);
+        if (user != null){
+            if (user.getIsBlocked() != 'Y')
+                return true;
+        }
+        return false;
 
     }
 
@@ -84,4 +89,29 @@ public class UserServices {
             );
         }
     }
+
+
+    public GeneralResponse blockUser(String username) {
+        User user = getUserByUserName(username);
+
+        if (user == null) {
+            return new GeneralResponse(
+                    HttpStatus.BAD_REQUEST,
+                    "Username doesnot exist!",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(null)
+            );
+        } else {
+            user.setIsBlocked('Y');
+            return new GeneralResponse(
+                    HttpStatus.ACCEPTED,
+                    "User Added!",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(userRepo.save(user))
+            );
+        }
+    }
+
 }

@@ -64,6 +64,24 @@ public class CarsController {
         return carServices.addCar(car);
     }
 
+
+    @PostMapping("/delete/{vin}/{username}/{password}")
+    @ResponseBody
+    private GeneralResponse addCar(@PathVariable String vin,
+                                   @PathVariable String username,
+                                   @PathVariable String password){
+        if(!userServices.usernameAndPasswordChecker(username, password)){
+            return new GeneralResponse(
+                    HttpStatus.UNAUTHORIZED,
+                    "Wrong Security Credentials",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody(null)
+            );
+        }
+        return carServices.deleteACar(vin, username);
+    }
+
     @GetMapping("/user/{username}/{password}")
     @ResponseBody
     private GeneralResponse getCarsByusername(@PathVariable String username,

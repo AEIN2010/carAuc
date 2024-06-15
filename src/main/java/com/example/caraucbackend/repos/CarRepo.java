@@ -13,5 +13,6 @@ public interface CarRepo extends JpaRepository<Car, String> {
     Car findCarByVinIs(String carId);
 
     List<Car> findAllByListerUsernameIs(String listerUsername);
+    Car deleteCarByVinIs(String vin);
 
 }

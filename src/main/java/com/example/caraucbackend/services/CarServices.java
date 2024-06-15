@@ -158,6 +158,35 @@ public class CarServices {
     }
 
 
+    public GeneralResponse deleteACar(String vin, String username){
+
+        Car car = carRepo.findCarByVinIs(vin);
+
+        if(car != null && car.getLister().getUsername().equals(username)){
+
+            car.setCarStatus(CarStatus.SOLD);
+
+            return new GeneralResponse(
+                    HttpStatus.ACCEPTED,
+                    "car marked as sold successfully",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(carRepo.deleteCarByVinIs(car.getVin()))
+            );
+        }
+        else {
+            return new GeneralResponse(
+                    HttpStatus.NOT_ACCEPTABLE,
+                    "car does not exist",
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    new GeneralResponseBody<>(null)
+            );        }
+
+    }
+
+
+
     public GeneralResponse carsListedByUser(String username){
 
         List<Car> cars = carRepo.findAllByListerUsernameIs(username);
