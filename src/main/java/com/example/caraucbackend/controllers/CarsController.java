@@ -118,7 +118,7 @@ public class CarsController {
     }
 
 
-    @GetMapping("/deactivate/{vin}/{username}/{password}")
+    @PostMapping("/deactivate/{vin}/{username}/{password}")
     @ResponseBody
     private GeneralResponse markCarAsInactive(@PathVariable String vin,
                                           @PathVariable String username,

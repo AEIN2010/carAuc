@@ -24,8 +24,8 @@ public class User {
     private String password;
     @NotNull
     private char isAdmin;
-    @ColumnDefault("N")
-    private char isBlocked;
+    @ColumnDefault("0")
+    private UserStatus userStatus;
 
 
 

@@ -3,6 +3,8 @@ package com.example.caraucbackend.services;
 
 import com.example.caraucbackend.DTOs.GeneralResponse;
 import com.example.caraucbackend.DTOs.GeneralResponseBody;
+import com.example.caraucbackend.entities.Car;
+import com.example.caraucbackend.entities.UserStatus;
 import com.example.caraucbackend.repos.UserRepo;
 import com.example.caraucbackend.entities.User;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -46,10 +49,10 @@ public class UserServices {
 
         User user = userRepo.findUserByUsernameIsAndPasswordIs(username, password);
         if (user != null){
-            if (user.getIsBlocked() != 'Y')
-                return true;
+            if (user.getUserStatus().equals(UserStatus.INACTIVE))
+                return false;
         }
-        return false;
+        return true;
 
     }
 
@@ -103,7 +106,7 @@ public class UserServices {
                     new GeneralResponseBody<>(null)
             );
         } else {
-            user.setIsBlocked('Y');
+            user.setUserStatus(UserStatus.INACTIVE);
             return new GeneralResponse(
                     HttpStatus.ACCEPTED,
                     "User Added!",
@@ -112,6 +115,19 @@ public class UserServices {
                     new GeneralResponseBody<>(userRepo.save(user))
             );
         }
+    }
+
+
+    public GeneralResponse getAllUsers(){
+        List<User> allUsers = userRepo.findAll();
+
+        return new GeneralResponse(
+                HttpStatus.ACCEPTED,
+                "car found",
+                LocalDate.now(),
+                LocalTime.now(),
+                new GeneralResponseBody<>(allUsers)
+        );
     }
 
 }
