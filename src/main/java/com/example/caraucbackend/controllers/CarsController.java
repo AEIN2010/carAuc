@@ -65,9 +65,9 @@ public class CarsController {
     }
 
 
-    @PostMapping("/delete/{vin}/{username}/{password}")
+    @DeleteMapping("/delete/{vin}/{username}/{password}")
     @ResponseBody
-    private GeneralResponse addCar(@PathVariable String vin,
+    private GeneralResponse deleteACar(@PathVariable String vin,
                                    @PathVariable String username,
                                    @PathVariable String password){
         if(!userServices.usernameAndPasswordChecker(username, password)){
