@@ -8,6 +8,7 @@ import com.example.caraucbackend.entities.CarStatus;
 import com.example.caraucbackend.entities.User;
 import com.example.caraucbackend.repos.CarRepo;
 import com.example.caraucbackend.entities.Car;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -49,23 +50,6 @@ public class CarServices {
         );
     }
 
-//    public GeneralResponse getCarsByMake(String make){
-//        List<Car> cars = carRepo.findCarsByMakeIs(make);
-//
-//        for(Car car:cars){
-//            car.getLister().setCarList(null);
-//            car.getLister().setBidsList(null);
-//        }
-//
-//        return new GeneralResponse(
-//                HttpStatus.ACCEPTED,
-//                "car found",
-//                LocalDate.now(),
-//                LocalTime.now(),
-//                cars
-//        );
-//    }
-
     public GeneralResponse addCar(NewCarRequest car){
         User user = userServices.getUserByUserName(car.getListerUsername());
         if(carRepo.findCarByVinIs(car.getVin()) != null){
@@ -86,7 +70,7 @@ public class CarServices {
                 car.getPrice(),
                 car.getImage(),
                 car.getMileage(),
-                car.getCarStatus(),
+                CarStatus.ACTIVE,
                 user,
                 new ArrayList<>()
         ));
@@ -134,7 +118,7 @@ public class CarServices {
 
         Car car = carRepo.findCarByVinIs(vin);
 
-        if(car != null && car.getLister().getUsername().equals(username)){
+        if(car != null){
 
             car.setCarStatus(CarStatus.INACTIVE);
 
@@ -157,14 +141,13 @@ public class CarServices {
 
     }
 
-
+    @Transactional
     public GeneralResponse deleteACar(String vin, String username){
 
         Car car = carRepo.findCarByVinIs(vin);
 
-        if(car != null && car.getLister().getUsername().equals(username)){
+        if(car != null){
 
-            car.setCarStatus(CarStatus.SOLD);
 
             return new GeneralResponse(
                     HttpStatus.ACCEPTED,

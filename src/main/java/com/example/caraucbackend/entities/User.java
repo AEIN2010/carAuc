@@ -24,7 +24,7 @@ public class User {
     private String password;
     @NotNull
     private char isAdmin;
-    @ColumnDefault("0")
+    @ColumnDefault("1")
     private UserStatus userStatus;
 
 

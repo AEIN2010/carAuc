@@ -42,4 +42,16 @@ public class Car {
 
     @OneToMany
     private List<Bid> bidHistory;
+
+    public Car(String vin, String make, String model, String year, long price, String image, String mileage, User lister, List<Bid> bidHistory) {
+        this.vin = vin;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.price = price;
+        this.image = image;
+        this.mileage = mileage;
+        this.lister = lister;
+        this.bidHistory = bidHistory;
+    }
 }

@@ -38,7 +38,8 @@ public class BidServices {
                 Bid currentBid = bidRepo.save(new Bid(bidRequest.getAmount()
                                         , LocalDate.now()
                                         , LocalTime.now()
-                                        , userServices.getUserByUserName(bidRequest.getBidderUserName())));
+                                        , userServices.getUserByUserName(bidRequest.getBidderUserName())
+                                        , bidRequest.getCarVin()));
 
                 //User user = userServices.getUserByUserName(bidRequest.getBidderUserName());
                 Car car2 = (Car) carServices.getCarByVin(bidRequest.getCarVin()).getBody().getData();

@@ -31,11 +31,14 @@ public class Bid {
     @NotNull
     private User bidder;
 
+    private String vin;
 
-    public Bid(double amount, LocalDate date, LocalTime time, User bidder) {
+
+    public Bid(double amount, LocalDate date, LocalTime time, User bidder, String vin) {
         this.amount = amount;
         this.date = date;
         this.time = time;
         this.bidder = bidder;
+        this.vin = vin;
     }
 }

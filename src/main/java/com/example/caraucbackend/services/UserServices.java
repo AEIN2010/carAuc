@@ -83,6 +83,7 @@ public class UserServices {
                     new GeneralResponseBody<>(null)
             );
         }else{
+            user.setUserStatus(UserStatus.ACTIVE);
             return new GeneralResponse(
                     HttpStatus.ACCEPTED,
                     "User Added!",
